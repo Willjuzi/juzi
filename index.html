@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>桔子的单词大挑战</title>
   <link rel="stylesheet" href="style.css" />
+  <!-- defer 确保等页面加载完才执行脚本 -->
+  <script src="words.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="script.js" defer></script>
 </head>
 <body>
   <h1>桔子的单词大挑战</h1>
@@ -12,10 +16,5 @@
   <div id="wordContainer"></div>
   <button id="submitBtn">提交</button>
   <button id="retryBtn" style="display:none;">错词再练</button>
-
-  <!-- 加载顺序很重要 -->
-  <script src="words.js"></script>
-  <script src="app.js"></script>
-  <script src="script.js"></script>
 </body>
 </html>
