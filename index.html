@@ -8,11 +8,12 @@
 </head>
 <body>
   <h1>桔子的单词大挑战</h1>
-  <div id="stats">加载中...</div>
-  <div id="word-container"></div>
-  <button id="submit-btn">提交</button>
-  <button id="retry-btn" style="display:none;">再练错词</button>
+  <div id="stats"></div>
+  <div id="wordContainer"></div>
+  <button id="submitBtn">提交</button>
+  <button id="retryBtn" style="display:none;">错词再练</button>
 
+  <!-- 加载顺序非常重要：先 words.js，再 script.js -->
   <script src="words.js"></script>
   <script src="script.js"></script>
 </body>
