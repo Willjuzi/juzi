@@ -7,24 +7,13 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>🍊 桔子的单词大挑战</h1>
-    <div class="stats">
-      <span id="newWords">今天掌握：0 个新词</span> |
-      <span id="curveWords">完成记忆曲线：0 个</span>
-    </div>
-  </header>
+  <h1>桔子的单词大挑战</h1>
+  <div id="stats">加载中...</div>
+  <div id="word-container"></div>
+  <button id="submit-btn">提交</button>
+  <button id="retry-btn" style="display:none;">再练错词</button>
 
-  <main>
-    <div id="wordList"></div>
-    <button id="submitBtn">提交</button>
-    <button id="retryBtn" style="display:none;">🔁 重新练习错词</button>
-  </main>
-
-  <footer>
-    <p>© 2025 桔子的单词大挑战</p>
-  </footer>
-
-  <script src="app.js"></script>
+  <script src="words.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
