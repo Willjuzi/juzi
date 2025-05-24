@@ -1,0 +1,66 @@
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  background: #fff9f0;
+  color: #333;
+}
+
+header {
+  background: #ffa500;
+  color: white;
+  padding: 1em;
+  text-align: center;
+}
+
+.stats {
+  font-size: 1rem;
+  margin-top: 0.5em;
+}
+
+main {
+  padding: 2em;
+  max-width: 600px;
+  margin: auto;
+}
+
+.word-item {
+  margin: 1em 0;
+}
+
+input {
+  font-size: 1.2rem;
+  padding: 0.5em;
+  width: 100%;
+}
+
+.correct {
+  border: 2px solid green;
+  background: #e6ffe6;
+}
+
+.incorrect {
+  border: 2px solid red;
+  background: #ffe6e6;
+}
+
+button {
+  margin-top: 1em;
+  padding: 0.8em 1.5em;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  background: #ff7f27;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #e06c1f;
+}
+
+footer {
+  text-align: center;
+  padding: 1em;
+  background: #f0f0f0;
+  margin-top: 2em;
+}
