@@ -1,20 +1,22 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>桔子的单词大挑战</title>
   <link rel="stylesheet" href="style.css" />
-  <!-- defer 确保等页面加载完才执行脚本 -->
-  <script src="words.js" defer></script>
-  <script src="app.js" defer></script>
-  <script src="script.js" defer></script>
 </head>
 <body>
-  <h1>桔子的单词大挑战</h1>
-  <div id="stats"></div>
-  <div id="wordContainer"></div>
-  <button id="submitBtn">提交</button>
-  <button id="retryBtn" style="display:none;">错词再练</button>
+  <div class="container">
+    <h1>桔子的单词大挑战</h1>
+    <div id="stats">今日记忆单词：0 | 完成记忆曲线：0</div>
+    <div id="word-list"></div>
+    <button id="submit">提交</button>
+    <button id="retry" style="display:none;">练习错词</button>
+  </div>
+
+  <!-- 加载顺序非常重要！ -->
+  <script src="words.js" defer></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
