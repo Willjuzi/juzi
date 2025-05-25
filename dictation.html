@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>听写模式 - 桔子的单词大挑战</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>📝 听写模式</h1>
+    <div id="dictation-section">
+      <p id="current-word-index"></p>
+      <button id="play-audio">🔊 播放</button>
+      <input type="text" id="answer-input" placeholder="请输入拼写" />
+      <button id="submit-answer">提交</button>
+    </div>
+    <div id="result-section" style="display: none;">
+      <p id="result-message"></p>
+      <button id="retry-button" style="display: none;">重新练习错词</button>
+    </div>
+  </div>
+  
+  <script src="words.js"></script>
+  <script src="storage.js"></script>
+  <script src="script-dictation.js"></script>
+</body>
+</html>
