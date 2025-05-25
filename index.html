@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,16 +7,21 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>桔子的单词大挑战</h1>
-    <div id="stats">今日记忆单词：0 | 完成记忆曲线：0</div>
-    <div id="word-list"></div>
-    <button id="submit">提交</button>
-    <button id="retry" style="display:none;">练习错词</button>
+  <h1>桔子的单词大挑战</h1>
+
+  <div id="stats">加载中...</div>
+  <div id="wordContainer"></div>
+
+  <div id="inputContainer"></div>
+  <button id="submitBtn">提交</button>
+  <div id="feedback"></div>
+
+  <div id="retrySection" style="display: none;">
+    <button id="retryBtn">再练一次错词</button>
   </div>
 
-  <!-- 加载顺序非常重要！ -->
-  <script src="words.js" defer></script>
-  <script src="script.js" defer></script>
+  <!-- 加载顺序非常重要：先 words.js，再 script.js -->
+  <script src="words.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
