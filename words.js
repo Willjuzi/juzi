@@ -1,4 +1,4 @@
-const words = [
+const wordList = [
   "over", "new", "art", "take", "only", "car", "park", "hard", "barn", "card", "shark", "dark",
   "oh", "eyes", "date", "hold", "little", "work", "know", "place", "years", "rain", "mail", "wait",
   "paint", "chant", "paid", "sail", "goods", "services", "consumer", "producer", "live", "me",
