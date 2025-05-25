@@ -1,27 +1,21 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>桔子的单词大挑战</title>
+  <title>桔子的单词大挑战 - 今日任务</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>桔子的单词大挑战</h1>
-
-  <div id="stats">加载中...</div>
-  <div id="wordContainer"></div>
-
-  <div id="inputContainer"></div>
-  <button id="submitBtn">提交</button>
-  <div id="feedback"></div>
-
-  <div id="retrySection" style="display: none;">
-    <button id="retryBtn">再练一次错词</button>
+  <div class="container">
+    <h1>桔子的单词大挑战</h1>
+    <h2>🎯 今日待记忆单词</h2>
+    <ul id="word-list"></ul>
+    <button id="start-dictation">进入听写模式</button>
   </div>
-
-  <!-- 加载顺序非常重要：先 words.js，再 script.js -->
+  
   <script src="words.js"></script>
-  <script src="script.js"></script>
+  <script src="storage.js"></script>
+  <script src="script-index.js"></script>
 </body>
 </html>
