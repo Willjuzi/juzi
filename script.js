@@ -1,94 +1,64 @@
 const wordsPerDay = 8;
-const wordList = [...words]; // 从 words.js 获取
-const todayKey = new Date().toISOString().slice(0, 10); // 2025-05-25
-const savedData = JSON.parse(localStorage.getItem('juzi-data') || '{}');
+let todayKey = new Date().toISOString().split("T")[0];
+let storedProgress = JSON.parse(localStorage.getItem("progress") || "{}");
+let todayWords = storedProgress[todayKey]?.words || [];
 
-if (!savedData[todayKey]) {
-  savedData[todayKey] = {
-    reviewedWords: [],
-    completed: false,
-    wrongWords: [],
-  };
-
-  // 抽取未出现过的单词
-  const usedWords = Object.values(savedData).flatMap(d => d.reviewedWords);
-  const available = wordList.filter(w => !usedWords.includes(w));
-  savedData[todayKey].reviewedWords = available.slice(0, wordsPerDay);
-  localStorage.setItem('juzi-data', JSON.stringify(savedData));
+if (todayWords.length === 0) {
+  const usedWords = Object.values(storedProgress).flatMap(day => day.words);
+  const unusedWords = wordList.filter(w => !usedWords.includes(w));
+  todayWords = unusedWords.slice(0, wordsPerDay);
+  storedProgress[todayKey] = { words: todayWords, correct: [] };
+  localStorage.setItem("progress", JSON.stringify(storedProgress));
 }
 
-let currentWords = savedData[todayKey].reviewedWords;
-let wrongWords = [];
-let retryMode = false;
+const wordListContainer = document.getElementById("word-list");
+todayWords.forEach(word => {
+  const div = document.createElement("div");
+  div.className = "word-item";
+  div.innerHTML = `<label>${word}</label><input data-word="${word}" />`;
+  wordListContainer.appendChild(div);
+});
 
-function speak(text) {
-  const utter = new SpeechSynthesisUtterance(text);
-  utter.lang = 'en-US';
-  speechSynthesis.speak(utter);
-}
-
-function renderWords(words) {
-  const container = document.getElementById('word-container');
-  container.innerHTML = '';
-  words.forEach((word, i) => {
-    const div = document.createElement('div');
-    div.className = 'word-input';
-    div.innerHTML = `
-      <button onclick="speak('${word}')">🔊</button>
-      <input type="text" data-word="${word}" placeholder="输入拼写..." />
-    `;
-    container.appendChild(div);
-  });
-}
-
-function updateStats() {
-  const total = Object.values(savedData)
-    .flatMap(day => day.reviewedWords)
-    .filter((w, i, a) => a.indexOf(w) === i).length;
-
-  const complete = Object.values(savedData)
-    .filter(day => day.completed)
-    .flatMap(day => day.reviewedWords)
-    .filter((w, i, a) => a.indexOf(w) === i).length;
-
-  document.getElementById('stats').textContent =
-    `今日记忆：${currentWords.length} 个 | 累计记住：${complete} 个`;
-}
-
-document.getElementById('submit-btn').onclick = function () {
-  const inputs = document.querySelectorAll('input');
-  let allCorrect = true;
-  wrongWords = [];
+document.getElementById("submit").onclick = () => {
+  const inputs = document.querySelectorAll("input");
+  let correct = [];
+  let wrong = [];
 
   inputs.forEach(input => {
-    const correct = input.dataset.word;
-    if (input.value.trim().toLowerCase() !== correct.toLowerCase()) {
-      allCorrect = false;
-      wrongWords.push(correct);
-      input.style.border = '2px solid red';
+    const target = input.dataset.word;
+    if (input.value.trim().toLowerCase() === target.toLowerCase()) {
+      correct.push(target);
+      input.style.borderColor = "green";
     } else {
-      input.style.border = '2px solid green';
+      wrong.push(target);
+      input.style.borderColor = "red";
     }
   });
 
-  if (allCorrect) {
-    savedData[todayKey].completed = true;
-    savedData[todayKey].wrongWords = [];
-    alert('全部正确，今日完成 ✅');
-  } else {
-    savedData[todayKey].wrongWords = wrongWords;
-    document.getElementById('retry-btn').style.display = 'inline-block';
-    alert(`有 ${wrongWords.length} 个错误 ❌，请点击下方按钮重练`);
-  }
+  storedProgress[todayKey].correct = correct;
+  localStorage.setItem("progress", JSON.stringify(storedProgress));
 
-  localStorage.setItem('juzi-data', JSON.stringify(savedData));
+  document.getElementById("retry").style.display = wrong.length ? "inline-block" : "none";
   updateStats();
 };
 
-document.getElementById('retry-btn').onclick = function () {
-  retryMode = true;
-  renderWords(savedData[todayKey].wrongWords);
+document.getElementById("retry").onclick = () => {
+  const wrongWords = todayWords.filter(word => !storedProgress[todayKey].correct.includes(word));
+  wordListContainer.innerHTML = "";
+  wrongWords.forEach(word => {
+    const div = document.createElement("div");
+    div.className = "word-item";
+    div.innerHTML = `<label>${word}</label><input data-word="${word}" />`;
+    wordListContainer.appendChild(div);
+  });
 };
 
-renderWords(currentWords);
+function updateStats() {
+  let learnedToday = storedProgress[todayKey]?.correct?.length || 0;
+  let finishedWords = Object.values(storedProgress)
+    .flatMap(d => d.correct || [])
+    .filter((v, i, a) => a.indexOf(v) === i).length;
+  document.getElementById("stats").textContent = `今日记忆单词：${learnedToday} | 完成记忆曲线：${finishedWords}`;
+}
+
 updateStats();
